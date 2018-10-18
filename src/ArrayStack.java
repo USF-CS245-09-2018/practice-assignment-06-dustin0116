@@ -40,9 +40,7 @@ public class ArrayStack implements Stack {
 
     private void resize() {
         Object[] newarr = new Object[arr.length*2];
-        for (int i = 0; i < arr.length; i++) {
-            newarr[i] = arr[i];
-        }
+        System.arraycopy(arr, 0, newarr, 0, arr.length);
         arr = newarr;
     }
 }
