@@ -1,35 +1,50 @@
 public class ArrayQueue implements Queue {
-    private int head = 0;
-    private int tail = 0;
-    private Object[] arr = new Object[10];
+    private int head;
+    private int tail;
+    private Object[] arr;
+
+    ArrayQueue() {
+        head = 0;
+        tail = 0;
+        arr = new Object[10];
+    }
 
     @Override
     public void enqueue(Object item) {
-        if (tail+1 != head) {
-            arr[tail++] = item;
-            if (tail >= arr.length) {
-                tail = 0;
-            }
-        } else {
-            double_array_size(arr);
+        try{
+            not_false(tail+1 != head);
+        } catch (Exception e) {
+            resize();
         }
+        arr[tail++] = item;
+        tail = tail%arr.length;
     }
 
     @Override
     public Object dequeue() {
-        if (head == tail) {
-            return arr[head++];
+        Object item = arr[head++];
+        if (head == arr.length) {
+            head = 0;
         }
+        return item;
     }
 
     @Override
     public boolean empty() {
-        return arr.length == 0;
+        return head == tail;
     }
 
-    private void double_array_size() {
-        Object[] temp = new Object[2*arr.length];
-        System.arraycopy(arr, 0, temp, 0, arr.length);
-        arr = temp;
+    private void resize() {
+        Object[] newarr = new Object[arr.length*2];
+        for (int i = 0; i < arr.length; i++) {
+            newarr[i] = arr[i];
+        }
+        arr = newarr;
+    }
+
+    private static void not_false(boolean expression) {
+        if(!expression) {
+            throw new IllegalArgumentException();
+        }
     }
 }
