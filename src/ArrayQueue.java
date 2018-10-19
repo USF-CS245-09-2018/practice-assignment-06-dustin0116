@@ -35,11 +35,14 @@ public class ArrayQueue implements Queue {
     }
 
     private void resize() {
-        Object[] newarr = new Object[arr.length*2];
+        int size = arr.length;
+        Object[] newArr = new Object[arr.length*2];
         for (int i = 0; i < arr.length; i++) {
-            newarr[i] = arr[i];
+            newArr[i] = arr[head++%arr.length];
         }
-        arr = newarr;
+        arr = newArr;
+        head = 1;
+        tail = size;
     }
 
     private static void not_false(boolean expression) {

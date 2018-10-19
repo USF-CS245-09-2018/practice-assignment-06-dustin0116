@@ -32,7 +32,8 @@ public class Practice06Test {
 		}
 
 		while (! stack.empty() && ! queue.empty()) {
-			if (! stack.pop().equals(queue.dequeue())) {
+			if (! stack.pop().toString().toLowerCase().replaceAll(" ", "")
+					.equals(queue.dequeue().toString().toLowerCase().replaceAll(" ", ""))) {
 				return false;
 			}
 		}

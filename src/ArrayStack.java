@@ -11,7 +11,7 @@ public class ArrayStack implements Stack {
 
     @Override
     public void push(Object item) {
-        if (top == arr.length) {
+        if (top == arr.length-1) {
             resize();
         }
         arr[++top] = item;
@@ -39,8 +39,8 @@ public class ArrayStack implements Stack {
     }
 
     private void resize() {
-        Object[] newarr = new Object[arr.length*2];
-        System.arraycopy(arr, 0, newarr, 0, arr.length);
-        arr = newarr;
+        Object[] newArr = new Object[arr.length*2];
+        System.arraycopy(arr, 0, newArr, 0, arr.length);
+        arr = newArr;
     }
 }
